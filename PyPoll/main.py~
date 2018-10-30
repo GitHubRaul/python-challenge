@@ -1,0 +1,51 @@
+#import os
+#os.chdir("/Users/raul.hennings/Dropbox/Bootcamp_UCBext/Homework-3")
+# Import Dependencies
+import pandas as pd
+import numpy as np
+# Create a reference to the CSV and import it into a Pandas DataFrame
+csv_path = "~/02-Homework_03-Python_Instructions_PyPoll_Resources_election_data.csv"
+PyPoll_df = pd.read_csv(csv_path)
+
+Candidates = PyPoll_df['Candidate'].unique().tolist()
+
+Votes_Results = PyPoll_df.groupby(['Candidate']).count()
+
+Total_Votes_ForEach = Votes_Results['County']
+
+Total_Votes = sum(Total_Votes_ForEach)
+
+Total_Votes_Correy = Total_Votes_ForEach['Correy']
+Percent_Correy = 100*Total_Votes_Correy/Total_Votes
+Total_Votes_Khan = Total_Votes_ForEach['Khan']
+Percent_Khan = 100*Total_Votes_Khan/Total_Votes
+Total_Votes_Li = Total_Votes_ForEach['Li']
+Percent_Li = 100*Total_Votes_Li/Total_Votes
+Total_Votes_OTooley = Total_Votes_ForEach['O\'Tooley']
+Percent_OTooley = 100*Total_Votes_OTooley/Total_Votes
+
+print(f'Election Results')
+print(f'-------------------------')
+print(f'Total Votes: {Total_Votes}')
+print(f'Total list of candidates: {Candidates}')
+print(f'Khan: {Percent_Khan}% ({Total_Votes_Khan}))')
+print(f'Correy: {Percent_Correy}% ({Total_Votes_Correy}))')
+print(f'Li: {Percent_Li}% ({Total_Votes_Li}))')
+print(f'O\'Tooley: {Percent_OTooley}% ({Total_Votes_OTooley}))')
+print(f'-------------------------------------------')
+print(f'Winner: Khan ({max(Total_Votes_ForEach)} votes)')
+print(f'-------------------------------------------')
+
+#text_file = open("~/ElectionResults.txt", "w")
+with open("ElectionResults.txt", "w") as text_file:
+    print(f'Election Results', file=text_file)
+    print(f'-------------------------', file=text_file)
+    print(f'Total Votes: {Total_Votes}', file=text_file)
+    print(f'Total list of candidates: {Candidates}', file=text_file)
+    print(f'Khan: {Percent_Khan}% ({Total_Votes_Khan}))', file=text_file)
+    print(f'Correy: {Percent_Correy}% ({Total_Votes_Correy}))', file=text_file)
+    print(f'Li: {Percent_Li}% ({Total_Votes_Li}))', file=text_file)
+    print(f'O\'Tooley: {Percent_OTooley}% ({Total_Votes_OTooley}))', file=text_file)
+    print(f'-------------------------------------------', file=text_file)
+    print(f'Winner: Khan ({max(Total_Votes_ForEach)} votes)', file=text_file)
+    print(f'-------------------------------------------', file=text_file)
